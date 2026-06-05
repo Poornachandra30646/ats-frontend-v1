@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
+import { AuthProvider } from "./context/AuthContext";
+import ATSAssistant from "./components/ATSAssistant";
+import { useAuth } from "./context/AuthContext";
+
+function ChatWrapper() {
+  const { token } = useAuth();
+  const path = window.location.pathname;
+
+  const protectedExact = [
+    "/dashboard",
+    "/upload-resume",
+    "/resume-history",
+    "/reports",
+    "/profile"
+  ];
+
+  const isProtected =
+    protectedExact.includes(path) ||
+    path.startsWith("/report/") ||
+    path.startsWith("/analyze/");
+
+  if (!token || !isProtected) {
+    return null;
+  }
+
+  return <ATSAssistant />;
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+        <ChatWrapper />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
