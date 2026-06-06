@@ -3,7 +3,7 @@ import axios from "axios";
 const api = axios.create({
 
   baseURL:
-    "https://ats-final-v1-backend.onrender.com/api/v1"
+    "http://16.176.205.149:5000/api/v1"
 
 });
 

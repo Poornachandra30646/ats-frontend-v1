@@ -39,8 +39,10 @@ function Dashboard() {
   const [analyzing, setAnalyzing] = useState(false);
 
   useEffect(() => {
-    fetchDashboard();
-  }, []);
+  fetchDashboard();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const fetchDashboard = async () => {
     try {

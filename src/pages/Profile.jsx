@@ -40,8 +40,10 @@ function Profile() {
   }, [user]);
 
   useEffect(() => {
-    fetchStats();
-  }, []);
+  fetchStats();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const fetchStats = async () => {
     try {

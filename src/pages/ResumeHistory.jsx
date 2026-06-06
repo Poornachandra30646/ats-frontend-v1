@@ -8,7 +8,6 @@ import {
   FaChartLine,
   FaSearch,
   FaPlus,
-  FaEye,
 } from "react-icons/fa";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
@@ -22,8 +21,10 @@ function ResumeHistory() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetchResumes();
-  }, []);
+  fetchResumes();
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   const fetchResumes = async () => {
     try {

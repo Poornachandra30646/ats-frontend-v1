@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   PieChart,
   Pie,
   Cell,
@@ -23,23 +22,33 @@ function ReportDetails() {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(false);
-
-  useEffect(() => {
-    fetchReport();
-  }, []);
-
   const fetchReport = async () => {
-    try {
-      const response = await api.get(`/reports/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setReport(response.data.report);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    const response = await api.get(`/reports/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setReport(response.data.report);
+
+  } catch (error) {
+
+    console.error(error);
+
+  } finally {
+
+    setLoading(false);
+
+  }
+};
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+useEffect(() => {
+
+  fetchReport();
+
+}, []);
 
   const handleExportPdf = async () => {
     setDownloading(true);

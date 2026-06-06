@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 import {
   AreaChart,
   Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 import api from "../services/api";
@@ -61,10 +57,11 @@ function Reports() {
     );
   });
 
-  useEffect(() => {
-    fetchReports();
-  }, []);
+ useEffect(() => {
+  fetchReports();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
   const fetchReports = async () => {
     try {
       const response = await api.get("/reports", {
